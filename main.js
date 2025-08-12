@@ -8,6 +8,11 @@ const musicIcons = require("./Emojis/Music.js");
 const emoji = require("./Emojis/EmojiId.js");
 const dotenv = require("dotenv");
 dotenv.config();
+const express = require("express");
+const app = express();
+const port = 8888;
+
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -682,4 +687,12 @@ client.on("error", error => {
 });
 
 client.login(process.env.TOKEN);
+
+app.get('/', (req, res) => {
+    const imagePath = path.join(__dirname, 'index.html');
+    res.sendFile(imagePath);
+});
+app.listen(port, () => {
+    console.log(`🔗 Listening to GlaceYT : http://localhost:${port}`);
+});
 module.exports = client;
